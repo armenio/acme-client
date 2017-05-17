@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+
+    <title>Produtos</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="assets/vendor/bootstrap/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="assets/vendor/jasny-bootstrap/dist/css/jasny-bootstrap.min.css">
+
+    <link rel="stylesheet" href="assets/local/dist/css/main.min.css">
+
+    <script src="assets/vendor/jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<div class="identity-manager identity-true">
+    <header id="header">
+        <nav class="navbar d-block">
+            <div class="clearfix">
+                <div class="brand d-block float-left">
+                    <div class="clearfix">
+                        <button class="navbar-toggler d-block float-left hidden-lg-up" type="button" data-toggle="offcanvas" data-target=".navmenu" data-canvas="#app">
+                            <i class="material-icons">menu</i>
+                        </button>
+                        <span class="navbar-brand d-block float-left">Produtos</span>
+                    </div>
+                </div>
+
+                <div class="w-40 d-block float-left hidden-md-down">
+                    <form class="form-search" method="GET" action="./" enctype="application/x-www-form-urlencoded">
+                        <div class="form-body">
+                            <div class="form-group element_q">
+                                <div class="input_q text">
+                                    <input type="text" required name="q" id="element_q" placeholder="Busque um produto" class="form-control" value="" autocomplete="off">
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" type="submit"><i class="material-icons">search</i></button>
+                        </div>
+                    </form>
+                </div>
+
+                <nav class="navbar d-block float-right hidden-md-down">
+
+                    Olá, <a class="has-icon animated" href="cadastro.html"><i class="icon material-icons">settings</i> <span id="identity-username"></span></a>
+
+                    <a class="has-icon animated" href="login.html?logout=now"><i class="icon material-icons">exit_to_app</i> Sair</a>
+                </nav>
+            </div>
+
+        </nav>
+    </header>
+
+    <div id="app">
+        <aside class="navmenu navmenu-default navmenu-fixed-left offcanvas-sm">
+            <ul class="nav flex-column hidden-lg-up">
+                <li class="nav-item">
+                    <form class="form-search" method="GET" action="./" enctype="application/x-www-form-urlencoded">
+                        <div class="form-body">
+                            <div class="form-group element_q">
+                                <div class="input_q text">
+                                    <input type="text" required name="q" id="element_q" placeholder="Busque um produto" class="form-control" value="" autocomplete="off">
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" type="submit"><i class="material-icons">search</i></button>
+                        </div>
+                    </form>
+                </li>
+            </ul>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="products-filter nav-link animated active" href="#todos" data-id="0"><i class="material-icons">home</i> Todos os produtos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="products-add nav-link animated" href="#adicioinar-produto" data-toggle="modal" data-target="#modal-products"><i class="material-icons">add</i> Cadastrar um produto</a>
+                </li>
+                <li class="nav-item">
+                    <a id="send-report" class="nav-link animated" href="#enviar-relatorio"><i class="material-icons">mail</i> Enviar relatório</a>
+                </li>
+
+                <li class="nav-item hidden-lg-up">
+                    <a class="nav-link animated" href="cadastro.html"><i class="material-icons">settings</i> Meus dados</a>
+                </li>
+                <li class="nav-item hidden-lg-up">
+                    <a class="nav-link animated" href="login.html?logout=now"><i class="material-icons">exit_to_app</i> Sair</a>
+                </li>
+            </ul>
+        </aside>
+
+        <main>
+            <form id="form-products-list">
+                <table id="products-list" class="table table-md table-hover">
+                    <tbody></tbody>
+                </table>
+            </form>
+
+            <button id="products-remove-all" class="btn btn-primary" style="display: none;"><i class="material-icons">close</i> Remover selecionados</button>
+        </main>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="modal-products" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title text-uppercase">Cadastro de <strong>Produtos</strong></h3>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <form method="POST" action="#" data-action="/products">
+                    <div class="form-body">
+
+                        <input type="hidden" name="id" value="">
+
+                        <div class="form-group element_name">
+
+                            <div class="input_name text">
+                                <input type="text" name="name" id="element_name" class="form-control" placeholder="Nome do produto" value="">
+                            </div>
+
+                        </div>
+
+                        <div class="form-group element_description">
+
+                            <div class="input_description text">
+                                <textarea type="text" name="description" id="element_description" class="form-control" placeholder="Descrição do produto" rows=""></textarea>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group element_price">
+
+                            <div class="input_price text">
+                                <input type="text" name="price" id="element_price" class="form-control" placeholder="Preço do produto" value="">
+                            </div>
+
+                        </div>
+
+                        <div class="form-group element_stock">
+
+                            <div class="input_stock text">
+                                <input type="number" name="stock" id="element_stock" class="form-control" placeholder="Quantidade em estoque" value="">
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="form-footer">
+                        <div class="row">
+                            <div class="col-12">
+
+                                <button type="submit" name="submit" class="btn btn-success" value="">Enviar</button>
+                                <button type="button" class="btn btn-secondary text-uppercase float-right" data-dismiss="modal">Cancelar</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="modal-product" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="details">
+                <div class="modal-header">
+                    <h3 class="modal-title text-uppercase">
+                        <strong id="product-name"></strong>
+                    </h3>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <h4><strong>Detalhes do produto</strong></h4>
+
+                    <div class="line has-icon"><strong><i class="icon material-icons">comment</i>Descrição</strong>
+                        <p><span id="product-description"></span></p>
+                    </div>
+
+                    <div class="line has-icon"><strong><i class="icon material-icons">attach_money</i>Preço:</strong> <span id="product-price"></span></div>
+                    <div class="line has-icon"><strong><i class="icon material-icons">equalizer</i>Em estoque:</strong> <span id="product-stock"></span></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var basePath = 'http://localhost:8000/api';
+</script>
+
+<script src="assets/vendor/tether/dist/js/tether.min.js"></script>
+<script src="assets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="assets/vendor/jquery.scrollTo/jquery.scrollTo.min.js"></script>
+<script src="assets/vendor/jquery.maskedinput/dist/jquery.maskedinput.min.js"></script>
+<script src="assets/vendor/jquery-maskmoney/dist/jquery.maskMoney.min.js"></script>
+<script src="assets/vendor/jasny-bootstrap/dist/js/jasny-bootstrap.min.js"></script>
+<script src="assets/vendor/js-cookie/src/js.cookie.js"></script>
+
+<script src="assets/local/dist/js/main.min.js"></script>
+<script src="assets/local/dist/js/app.min.js"></script>
+
+</body>
+</html>

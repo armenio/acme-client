@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+
+    <title>Produtos</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="assets/vendor/bootstrap/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="assets/vendor/jasny-bootstrap/dist/css/jasny-bootstrap.min.css">
+
+    <link rel="stylesheet" href="assets/local/dist/css/main.min.css">
+
+    <script src="assets/vendor/jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<header id="header">
+    <nav class="navbar d-block">
+        <span class="navbar-brand d-block text-center">Produtos</span>
+    </nav>
+</header>
+
+<br>
+<br>
+
+
+<div class="page-header identity-manager identity-false identity-active">
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-12">
+                <h1 class="text-center text-uppercase">
+                    Faça <strong>seu cadastro</strong>
+                </h1>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="page-header identity-manager identity-true">
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-12">
+                <h1 class="text-center text-uppercase">
+                    Alterar <strong>meus dados</strong>
+                </h1>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div id="register">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 col-12">
+
+                <div class="form-header spacer identity-manager identity-false identity-active">
+                    <div class="row">
+
+                        <div class="col-12">
+                            <div class="text-center">
+
+                                <span class="title">Já tem cadastro?</span>
+                                <a href="login.html" class="link">ACESSE SUA CONTA.</a>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-header spacer identity-manager identity-true">
+                    <div class="row">
+
+                        <div class="col-12">
+                            <div class="text-center">
+
+                                <span class="title">Seja bem vindo, <strong id="identity-username"></strong></span> -
+                                <a href="login.html?logout=now" class="link">SAIR</a>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <form method="POST" action="#cadastro" data-action="/users">
+                    <div class="form-body spacer">
+
+
+                        <input type="hidden" name="id" value="">
+
+
+                        <div class="form-group element_name">
+
+                            <label for="element_name">Nome</label>
+                            <div class="input_name text">
+                                <input type="text" name="name" id="element_name" class="form-control" placeholder="Seu nome" value="">
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group element_username">
+
+                            <label for="element_username">E-mail</label>
+                            <div class="input_username email">
+                                <input type="email" name="username" id="element_username" class="form-control" placeholder="Seu e-mail" value="">
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group element_password">
+
+                            <label for="element_password">Senha</label>
+                            <div class="input_password password">
+                                <input type="password" name="password" id="element_password" class="form-control" placeholder="Sua senha" value="">
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group element_passwordConfirmation">
+
+                            <label for="element_passwordConfirmation">Confirmar Senha</label>
+                            <div class="input_passwordConfirmation password">
+                                <input type="password" name="passwordConfirmation" id="element_passwordConfirmation" class="form-control" placeholder="Confirme sua senha" value="">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-footer identity-manager identity-false identity-active">
+
+                        <button type="submit" name="submit" class="btn btn-primary btn-padding btn-xs-block text-uppercase animated" value="">Cadastre-se</button>
+                    </div>
+
+                    <div class="form-footer identity-manager identity-true username">
+
+                        <button type="submit" name="submit" class="btn btn-primary btn-padding btn-xs-block text-uppercase animated" value="">Salvar as informações</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+<br>
+
+<script type="text/javascript">
+    var basePath = 'http://localhost:8000/api';
+</script>
+
+<script src="assets/vendor/tether/dist/js/tether.min.js"></script>
+<script src="assets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="assets/vendor/js-cookie/src/js.cookie.js"></script>
+
+<script src="assets/local/dist/js/main.min.js"></script>
+<script src="assets/local/dist/js/register.min.js"></script>
+
+</body>
+</html>

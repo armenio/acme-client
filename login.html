@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+
+    <title>Produtos</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="assets/vendor/bootstrap/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="assets/vendor/jasny-bootstrap/dist/css/jasny-bootstrap.min.css">
+
+    <link rel="stylesheet" href="assets/local/dist/css/main.min.css">
+
+    <script src="assets/vendor/jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<header id="header">
+    <nav class="navbar d-block">
+        <span class="navbar-brand d-block text-center">Produtos</span>
+    </nav>
+</header>
+
+<br>
+<br>
+
+<div class="page-header">
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-12">
+                <h1 class="text-center text-uppercase">Acesse <strong>sua conta</strong></h1>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div id="login">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 col-12">
+
+
+                <div class="form-header spacer">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="text-center">
+                                <span class="title">Ainda não tem conta?</span>
+                                <a href="cadastro.html" class="link">CADASTRE-SE.</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <form method="POST" action="#login" data-action="/login_check">
+                    <div class="form-body spacer">
+
+
+                        <div class="form-group element_username">
+
+                            <div class="input_username email">
+                                <input type="email" name="username" id="element_username" class="form-control" placeholder="Seu e-mail" value="">
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group element_password">
+
+                            <div class="input_password password">
+                                <input type="password" name="password" id="element_password" class="form-control" placeholder="Sua senha" value="">
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="form-footer">
+                        <div class="row">
+                            <div class="col-12">
+
+                                <button type="submit" name="submit" class="btn btn-primary btn-block text-uppercase animated" value="">Acessar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+<br>
+
+<script type="text/javascript">
+    var basePath = 'http://localhost:8000/api';
+</script>
+
+<script src="assets/vendor/tether/dist/js/tether.min.js"></script>
+<script src="assets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="assets/vendor/purl/purl.js"></script>
+<script src="assets/vendor/js-cookie/src/js.cookie.js"></script>
+
+<script src="assets/local/dist/js/main.min.js"></script>
+<script src="assets/local/dist/js/login.min.js"></script>
+
+</body>
+</html>
