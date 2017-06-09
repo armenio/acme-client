@@ -1,4 +1,4 @@
-# Gerenciador de produtos Acme Zend 3
+# Gerenciador de produtos Acme [Client]
 
 Cliente para Api para gestão de produtos da empresa Acme
 

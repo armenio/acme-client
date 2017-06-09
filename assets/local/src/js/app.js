@@ -13,7 +13,7 @@ $(document).ready(function () {
         var headerHeight = $('#header').height();
         var appHeight = windowHeight - headerHeight;
 
-        $('#app').height(appHeight);
+        $('#content').height(appHeight);
     };
 
     fixAppHeight();

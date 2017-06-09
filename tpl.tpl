@@ -35,6 +35,8 @@
 <script src="assets/vendor/jasny-bootstrap/dist/js/jasny-bootstrap.min.js"></script>
 <script src="assets/vendor/js-cookie/src/js.cookie.js"></script>
 
+<script src="assets/vendor/vue/dist/vue.min.js"></script>
+
 <script src="assets/local/dist/js/main.min.js"></script>
 
 </body>

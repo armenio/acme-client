@@ -21,7 +21,7 @@
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
 
-<div class="identity-manager identity-true">
+<div id="app" class="identity-manager identity-true">
     <header id="header">
         <nav class="navbar d-block">
             <div class="clearfix">
@@ -35,16 +35,18 @@
                 </div>
 
                 <div class="w-40 d-block float-left hidden-md-down">
-                    <form class="form-search" method="GET" action="./" enctype="application/x-www-form-urlencoded">
-                        <div class="form-body">
-                            <div class="form-group element_q">
-                                <div class="input_q text">
-                                    <input type="text" required name="q" id="element_q" placeholder="Busque um produto" class="form-control" value="" autocomplete="off">
+                    <template id="component-search">
+                        <form class="form-search" method="GET" action="./" enctype="application/x-www-form-urlencoded">
+                            <div class="form-body">
+                                <div class="form-group element_q">
+                                    <div class="input_q text">
+                                        <input v-model.trim="q" type="text" required name="q" id="element_q" placeholder="Busque um produto" class="form-control" value="" autocomplete="off">
+                                    </div>
                                 </div>
+                                <button class="btn btn-primary" type="submit"><i class="material-icons">search</i></button>
                             </div>
-                            <button class="btn btn-primary" type="submit"><i class="material-icons">search</i></button>
-                        </div>
-                    </form>
+                        </form>
+                    </template>
                 </div>
 
                 <nav class="navbar d-block float-right hidden-md-down">
@@ -58,20 +60,11 @@
         </nav>
     </header>
 
-    <div id="app">
+    <div id="content">
         <aside class="navmenu navmenu-default navmenu-fixed-left offcanvas-sm">
             <ul class="nav flex-column hidden-lg-up">
                 <li class="nav-item">
-                    <form class="form-search" method="GET" action="./" enctype="application/x-www-form-urlencoded">
-                        <div class="form-body">
-                            <div class="form-group element_q">
-                                <div class="input_q text">
-                                    <input type="text" required name="q" id="element_q" placeholder="Busque um produto" class="form-control" value="" autocomplete="off">
-                                </div>
-                            </div>
-                            <button class="btn btn-primary" type="submit"><i class="material-icons">search</i></button>
-                        </div>
-                    </form>
+                    <component-search></component-search>
                 </li>
             </ul>
             <ul class="nav flex-column">
@@ -96,9 +89,51 @@
 
         <main>
             <form id="form-products-list">
-                <table id="products-list" class="table table-md table-hover">
-                    <tbody></tbody>
+                <table v-if="products.length > 0" id="products-list" class="table table-md table-hover">
+                    <tbody>
+                    <tr v-for="product in products">
+                        <td class="td-checkbox">
+                            <label class="custom-control custom-checkbox" :for="'id_' + product.id">
+                                <input type="checkbox" name="ids[]" :id="'id_' + product.id" :value="product.id" class="custom-control-input">
+                                <span class="custom-control-indicator"></span>
+                            </label>
+                        </td>
+                        <td>
+                            <a class="products-view animated" href="#visualizar" :data-id="product.id" data-toggle="modal" data-target="#modal-product">{{ product.name }}</a>
+                        </td>
+                        <td class="text-center hidden-sm-down">
+                            <a class="products-view animated" href="#visualizar" :data-id="product.id" data-toggle="modal" data-target="#modal-product">
+                                <span v-if="product.stock == 0" class="text-danger">
+                                    Esgotado!
+                                </span>
+                                <span v-else-if="product.stock == 1">
+                                    {{ product.stock }} Unidade
+                                </span>
+                                <span v-else>
+                                    {{ product.stock }} Unidades
+                                </span>
+                            </a>
+                        </td>
+                        <td class="text-center">
+                            <div class="actions hidden-lg-up">
+                                <a class="product-edit animated" href="#editar" :data-id="product.id" data-toggle="modal" data-target="#modal-products"><i class="material-icons">edit</i></a>
+                                <a class="products-remove animated" href="#remover" :data-id="product.id"><i class="material-icons">close</i></a>
+                            </div>
+                            <span class="placeholder"></span>
+                        </td>
+                    </tr>
+                    </tbody>
                 </table>
+
+                <div v-else-if="q != ''">
+                    <p class="error-message">Nenhum produto encontrado na busca.</p>
+                    <p class="error-message"><a class="products-filter animated" href="#todos" data-id="0">Ver todos os produtos</a></p>
+                </div>
+
+                <div v-else>
+                    <p class="error-message">Nenhum produto encontrado.</p>
+                    <p class="error-message"><a class="products-add btn btn-primary animated" href="#adicioinar-produto" data-toggle="modal" data-target="#modal-products"><i class="icon material-icons">add</i> Cadastrar um produto</a></p>
+                </div>
             </form>
 
             <button id="products-remove-all" class="btn btn-primary" style="display: none;"><i class="material-icons">close</i> Remover selecionados</button>
@@ -217,6 +252,8 @@
 <script src="assets/vendor/jquery-maskmoney/dist/jquery.maskMoney.min.js"></script>
 <script src="assets/vendor/jasny-bootstrap/dist/js/jasny-bootstrap.min.js"></script>
 <script src="assets/vendor/js-cookie/src/js.cookie.js"></script>
+<script src="assets/vendor/vue/dist/vue.min.js"></script>
+<script src="assets/vendor/axios/dist/axios.min.js"></script>
 
 <script src="assets/local/dist/js/main.min.js"></script>
 <script src="assets/local/dist/js/app.min.js"></script>

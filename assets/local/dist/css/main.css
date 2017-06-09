@@ -226,14 +226,14 @@ body {
       margin-right: 0; }
     body header .navbar a:hover {
       color: #ffccc9; }
-  body #app {
+  body #content {
     overflow: hidden; }
     @media (min-width: 992px) {
-      body #app {
+      body #content {
         padding-left: 300px; } }
-    body #app .b-r {
+    body #content .b-r {
       border-right: 1px solid #eeeeee; }
-    body #app aside {
+    body #content aside {
       overflow: auto;
       padding-top: 1em;
       top: 54px;
@@ -241,80 +241,80 @@ body {
       background: #ffffff;
       padding-left: 0;
       padding-right: 0; }
-      body #app aside a {
+      body #content aside a {
         color: #333333; }
-      body #app aside a:hover {
+      body #content aside a:hover {
         color: #737373; }
-      body #app aside > .nav {
+      body #content aside > .nav {
         border-bottom: 1px solid #eeeeee; }
-      body #app aside .nav .nav-item {
+      body #content aside .nav .nav-item {
         position: relative; }
-        body #app aside .nav .nav-item .nav-link {
+        body #content aside .nav .nav-item .nav-link {
           padding: .5em 1em; }
-        body #app aside .nav .nav-item .nav-link.active {
+        body #content aside .nav .nav-item .nav-link.active {
           background: #f7f7f7;
           color: #ff3b30; }
-        body #app aside .nav .nav-item .sub-nav .nav-item .nav-link {
+        body #content aside .nav .nav-item .sub-nav .nav-item .nav-link {
           padding: .25em 1em;
           padding-left: 1.5em; }
-        body #app aside .nav .nav-item .sub-nav .nav-item .actions {
+        body #content aside .nav .nav-item .sub-nav .nav-item .actions {
           position: absolute;
           top: 5px;
           right: 10px;
           padding: 2px;
           line-height: 100%;
           color: #333333; }
-          body #app aside .nav .nav-item .sub-nav .nav-item .actions a {
+          body #content aside .nav .nav-item .sub-nav .nav-item .actions a {
             padding: 5px; }
-        body #app aside .nav .nav-item .sub-nav .nav-item:hover .actions {
+        body #content aside .nav .nav-item .sub-nav .nav-item:hover .actions {
           display: block !important; }
-        body #app aside .nav .nav-item .sub-nav .nav-item:last-child .nav-link {
+        body #content aside .nav .nav-item .sub-nav .nav-item:last-child .nav-link {
           padding: .5em 1em;
           padding-left: 1.5em; }
-      body #app aside .form-search {
+      body #content aside .form-search {
         margin: 0em 1em .5em 1em; }
-    body #app main {
+    body #content main {
       overflow: auto;
       padding-top: 1em;
       height: 100%;
       background: #ffffff; }
-      body #app main .alert {
+      body #content main .alert {
         margin: 0 10px 10px 10px; }
-      body #app main table tr td {
+      body #content main table tr td {
         border-top: none;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
         padding-left: 0;
         padding-right: 0; }
-        body #app main table tr td a {
+        body #content main table tr td a {
           display: block;
           color: #333333; }
-        body #app main table tr td a:hover {
+        body #content main table tr td a:hover {
           text-decoration: none;
           color: #737373; }
-        body #app main table tr td label {
+        body #content main table tr td label {
           margin: 0;
           padding: 0;
           display: block; }
-        body #app main table tr td .actions a {
+        body #content main table tr td .actions a {
           padding: 5px;
           display: inline; }
-        body #app main table tr td .placeholder {
+        body #content main table tr td .placeholder {
           display: block;
           height: 0px;
           width: 60px;
           overflow: hidden;
           margin: 0 auto; }
-      body #app main table tr td:first-child {
+      body #content main table tr td:first-child {
         padding-left: .75rem; }
-      body #app main table tr td:last-child {
+      body #content main table tr td:last-child {
         padding-right: .75rem; }
-      body #app main table tr td.td-checkbox {
+      body #content main table tr td.td-checkbox {
         width: 50px; }
-      body #app main table tr:hover td .actions {
+      body #content main table tr:hover td .actions {
         display: block !important; }
-      body #app main #products-remove-all {
+      body #content main #products-remove-all {
         display: none;
         position: absolute;
         bottom: 15px;

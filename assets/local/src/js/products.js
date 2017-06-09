@@ -1,7 +1,3 @@
-// variáveis globais criadas na view index.phtml
-
-var JsonProducts = [];
-
 /**
  * Verifica se algum produto foi marcado para remoção em massa
  */
@@ -13,94 +9,79 @@ var checkSelectedProducts = function () {
     }
 };
 
-/**
- * Retorna o código html de um produto para exibir na listagem
- * @param product
- * @returns {string}
- */
-var getProductTpl = function (product) {
-    return '<tr>\
-        <td class="td-checkbox">\
-            <label class="custom-control custom-checkbox" for="id_' + product.id + '">\
-                <input type="checkbox" name="ids[]" id="id_' + product.id + '" value="' + product.id + '" class="custom-control-input">\
-                <span class="custom-control-indicator"></span>\
-            </label>\
-        </td>\
-        <td>\
-            <a class="products-view animated" href="#visualizar" data-id="' + product.id + '" data-toggle="modal" data-target="#modal-product">' + product.name + '</a>\
-        </td>\
-        <td class="text-center hidden-sm-down">\
-            <a class="products-view animated" href="#visualizar" data-id="' + product.id + '" data-toggle="modal" data-target="#modal-product">' + (product.stock ? (product.stock + ' unidade' + (product.stock > 1 ? 's' : '')) : '<span class="text-danger">Esgotado!</span>') + '</a>\
-        </td>\
-        <td class="text-center">\
-            <div class="actions hidden-lg-up">\
-                <a class="product-edit animated" href="#editar" data-id="' + product.id + '" data-toggle="modal" data-target="#modal-products"><i class="material-icons">edit</i></a>\
-                <a class="products-remove animated" href="#remover" data-id="' + product.id + '"><i class="material-icons">close</i></a>\
-            </div>\
-            <span class="placeholder"></span> \
-        </td>\
-    </tr>';
-};
+Vue.component('component-search', {
+    template: '#component-search',
+    props: ['q']
+});
+
+var vm = new Vue({
+    el: '#app',
+    data: {
+        q: '',
+        products: []
+    }
+});
 
 /**
  * Atualiza a listagem de produtos
  */
 var updateProductsList = function () {
 
-    var $list = $('#products-list tbody');
+    var q = vm.q;
 
-    var q = $.trim($('#element_q').val());
-
-    $.ajax({
-        url: basePath + '/products',
-        type: 'GET',
-        dataType: 'json',
-        data: {
-            q: q,
-            order: 'stock',
-            by: 'asc'
-        },
-        beforeSend: function (jqXHR) {
-            jqXHR.setRequestHeader('Authorization', 'Bearer ' +  jwt.token);
-
-            $('#app').addLoader();
-
-            $('.error-message').remove();
-
-            $list.hide().html('');
-        },
-        success: function (data) {
-            JsonProducts = data;
-
-
-            if (objectLength(data) > 0) {
-                $list.show();
-
-                for (var i in data) {
-                    $list.append(getProductTpl(data[i]));
-                }
+    axios.get(basePath + '/products', {
+            /*headers: {
+                'Authorization': 'Bearer ' + jwt.token
+            },*/
+            params: {
+                q: q,
+                order: 'stock',
+                by: 'asc'
             }
-        },
-        complete: function () {
+        })
+        .then(function (response) {
+            //console.log(response);
+            vm.products = response.data;
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 
-            if ($.trim($list.html()) == '') {
-                if (q !== '') {
-                    $list.before('<p class="error-message">Nenhum produto encontrado na busca.</p>\
-                    <p class="error-message"><a class="products-filter animated" href="#todos" data-id="0">Ver todos os produtos</a></p>');
-                } else {
-                    $list.before('<p class="error-message">Nenhum produto encontrado.</p>\
-                    <p class="error-message"><a class="products-add btn btn-primary animated" href="#adicioinar-produto" data-toggle="modal" data-target="#modal-products"><i class="icon material-icons">add</i> Cadastrar um produto</a></p>');
-                }
-            }
+    /*
+     $.ajax({
+     url: basePath + '/products',
+     type: 'GET',
+     dataType: 'json',
+     data: {
+     q: q,
+     order: 'stock',
+     by: 'asc'
+     },
+     beforeSend: function (jqXHR) {
+     jqXHR.setRequestHeader('Authorization', 'Bearer ' + jwt.token);
 
-            checkSelectedProducts();
+     $('#content').addLoader();
 
-            $('#app').removeLoader();
-        }
-    });
+     $('.error-message').remove();
+     },
+     success: function (data) {
+     //vm.products = data;
+     },
+     complete: function () {
+
+     checkSelectedProducts();
+
+     $('#content').removeLoader();
+     }
+     });
+     */
 };
 
 $(document).ready(function () {
+    if (typeof jwt == 'object' && typeof jwt.token == 'string') {
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + jwt.token;
+    }
+
     updateProductsList();
 
     var formDefaults = {
@@ -135,7 +116,7 @@ $(document).ready(function () {
      */
     $('#modal-products form').zfAjaxForm({
         beforeSend: function (jqXHR) {
-            jqXHR.setRequestHeader('Authorization', 'Bearer ' +  jwt.token);
+            jqXHR.setRequestHeader('Authorization', 'Bearer ' + jwt.token);
 
             var $form = $(this);
 
@@ -190,7 +171,7 @@ $(document).ready(function () {
             type: 'GET',
             dataType: 'json',
             beforeSend: function (jqXHR) {
-                jqXHR.setRequestHeader('Authorization', 'Bearer ' +  jwt.token);
+                jqXHR.setRequestHeader('Authorization', 'Bearer ' + jwt.token);
 
                 $form.closest('.modal-content').addLoader();
             },
@@ -228,12 +209,12 @@ $(document).ready(function () {
                 type: 'DELETE',
                 dataType: 'json',
                 beforeSend: function (jqXHR) {
-                    jqXHR.setRequestHeader('Authorization', 'Bearer ' +  jwt.token);
+                    jqXHR.setRequestHeader('Authorization', 'Bearer ' + jwt.token);
 
-                    $('#app').addLoader();
+                    $('#content').addLoader();
                 },
                 complete: function () {
-                    
+
                 },
                 success: function (data) {
                     updateProductsList();
@@ -241,8 +222,8 @@ $(document).ready(function () {
                 error: function (jqXHR) {
                     var $form = $('main form');
 
-                    $('#app').removeLoader();
-                    
+                    $('#content').removeLoader();
+
                     showFlashMessenger($form, [{
                         type: 'danger',
                         icon: 'error',
@@ -268,9 +249,9 @@ $(document).ready(function () {
                 dataType: 'json',
                 data: $('#form-products-list').serialize(),
                 beforeSend: function (jqXHR) {
-                    jqXHR.setRequestHeader('Authorization', 'Bearer ' +  jwt.token);
+                    jqXHR.setRequestHeader('Authorization', 'Bearer ' + jwt.token);
 
-                    $('#app').addLoader();
+                    $('#content').addLoader();
                 },
                 complete: function () {
 
@@ -279,7 +260,7 @@ $(document).ready(function () {
                     updateProductsList();
                 },
                 error: function (jqXHR) {
-                    $('#app').removeLoader();
+                    $('#content').removeLoader();
 
                     var $form = $('main form');
                     showFlashMessenger($form, [{
@@ -315,7 +296,7 @@ $(document).ready(function () {
             type: 'GET',
             dataType: 'json',
             beforeSend: function (jqXHR) {
-                jqXHR.setRequestHeader('Authorization', 'Bearer ' +  jwt.token);
+                jqXHR.setRequestHeader('Authorization', 'Bearer ' + jwt.token);
 
                 $container.find('#product-name').html('');
 
@@ -359,12 +340,12 @@ $(document).ready(function () {
                 type: 'GET',
                 dataType: 'json',
                 beforeSend: function (jqXHR) {
-                    jqXHR.setRequestHeader('Authorization', 'Bearer ' +  jwt.token);
+                    jqXHR.setRequestHeader('Authorization', 'Bearer ' + jwt.token);
 
-                    $('#app').addLoader();
+                    $('#content').addLoader();
                 },
                 complete: function () {
-                    $('#app').removeLoader();
+                    $('#content').removeLoader();
 
                     removeFlashMessenger();
                 },
@@ -405,7 +386,7 @@ $(document).ready(function () {
     $(document).on('click', '.products-filter', function (e) {
         e.preventDefault();
 
-        $('input[name="q"]').val('');
+        //$('input[name="q"]').val('');
 
         updateProductsList();
     });
